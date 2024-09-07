@@ -1,0 +1,15 @@
+@BASE_URL=http://localhost:8080
+
+GET {{BASE_URL}}/saludo
+
+### 
+
+GET {{BASE_URL}}/saludo/alumno
+
+### 
+
+GET {{BASE_URL}}/saludo/alumno/1?query=hola
+
+###
+
+GET {{BASE_URL}}/saludo/sucursal/123
