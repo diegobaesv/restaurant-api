@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Data
@@ -48,9 +50,10 @@ public class Sucursal {
     @Column(name = "longitud")
     private String longitud;
 
-    @Column(name = "estado_auditoria")
+    @Column(name = "estado_auditoria", insertable = false, updatable = false)
+    @JsonIgnore
     private String estadoAuditoria;
 
-    @Column(name = "fecha_creacion")
+    @Column(name = "fecha_creacion", insertable = false, updatable = false)
     private LocalDateTime fechaCreacion;
 }
