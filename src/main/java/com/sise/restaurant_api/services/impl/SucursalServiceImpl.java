@@ -37,7 +37,7 @@ public class SucursalServiceImpl implements ISucursalService {
 
     @Override
     public void darBajaSucursal(Integer idSucursal) throws Exception {
-        
+        sucursalRepository.darBajaSucursal(idSucursal);
     }
     
 }

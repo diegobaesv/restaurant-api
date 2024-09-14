@@ -12,7 +12,6 @@ GET {{BASE_URL}}/sucursales/3
 
 ###
 
-
 POST {{BASE_URL}}/sucursales HTTP/1.1
 content-type: application/json
 
@@ -27,3 +26,25 @@ content-type: application/json
     "latitud": "-12.1460036",
     "longitud": "-76.9878069"
 }
+
+###
+
+PUT {{BASE_URL}}/sucursales/1 HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Sucursal actualizado",
+    "direccion": "direccion prueba",
+    "imagenUrl": "http://localhost:8090/imagenes/restaurante1.jpg",
+    "telefono": "987654433",
+    "correo": "correoprueba@gmail.com",
+    "diasAtencion": "Lunes a Martes",
+    "horarioAtencion": "9:00am a 10:00am",
+    "latitud": "-12.1460036",
+    "longitud": "-76.9878069"
+}
+
+
+###
+
+PATCH {{BASE_URL}}/sucursales/dar-baja/1 HTTP/1.1
