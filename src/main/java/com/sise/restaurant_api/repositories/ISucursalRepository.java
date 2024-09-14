@@ -8,9 +8,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sise.restaurant_api.entities.Sucursal;
+import java.util.List;
+
 
 @Repository
 public interface ISucursalRepository extends JpaRepository<Sucursal, Integer> {
+
+    List<Sucursal> findByEstadoAuditoria(String estadoAuditoria);
+    Sucursal findOneByIdSucursalAndEstadoAuditoria(Integer idSucursal, String estadoAuditoria);
 
     @Modifying
     @Transactional

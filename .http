@@ -7,7 +7,7 @@ GET {{BASE_URL}}/sucursales
 
 ###
 
-GET {{BASE_URL}}/sucursales/3
+GET {{BASE_URL}}/sucursales/1
 
 
 ###
@@ -29,7 +29,7 @@ content-type: application/json
 
 ###
 
-PUT {{BASE_URL}}/sucursales/1 HTTP/1.1
+PUT {{BASE_URL}}/sucursales/15 HTTP/1.1
 content-type: application/json
 
 {
@@ -47,4 +47,4 @@ content-type: application/json
 
 ###
 
-PATCH {{BASE_URL}}/sucursales/dar-baja/1 HTTP/1.1
+PATCH {{BASE_URL}}/sucursales/dar-baja/2 HTTP/1.1

@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sise.restaurant_api.entities.Sucursal;
 import com.sise.restaurant_api.services.ISucursalService;
+import com.sise.restaurant_api.shared.BaseResponse;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,57 +29,64 @@ public class SucursalController {
     private ISucursalService sucursalService;
     
     @GetMapping("")
-    public ResponseEntity<List<Sucursal>> listarSucursales() {
+    public ResponseEntity<BaseResponse> listarSucursales() {
         try {
             List<Sucursal> sucursales = sucursalService.listarSucursales();
-            return new ResponseEntity<>(sucursales, HttpStatus.OK);
+            return new ResponseEntity<>(BaseResponse.success(sucursales), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
 
     @GetMapping("/{idSucursal}")
-    public ResponseEntity<Sucursal> obtenerSucursal(@PathVariable Integer idSucursal) {
+    public ResponseEntity<BaseResponse> obtenerSucursal(@PathVariable Integer idSucursal) {
         try {
             Sucursal sucursal = sucursalService.obtenerSucursal(idSucursal);
-            return new ResponseEntity<>(sucursal, HttpStatus.OK);
+            if(sucursal == null) {
+                return new ResponseEntity<>(BaseResponse.errorNotFound(),HttpStatus.NOT_FOUND);
+            }
+            return new ResponseEntity<>(BaseResponse.success(sucursal), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("")
-    public ResponseEntity<Sucursal> insertarSucursal(@RequestBody Sucursal sucursalInsert) {
+    public ResponseEntity<BaseResponse> insertarSucursal(@RequestBody Sucursal sucursalInsert) {
         try {
             Sucursal sucursal = sucursalService.insertarSucursal(sucursalInsert);
-            return new ResponseEntity<>(sucursal, HttpStatus.CREATED);
+            return new ResponseEntity<>(BaseResponse.success(sucursal), HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{idSucursal}")
-    public ResponseEntity<Sucursal> actualizarSucursal(@PathVariable Integer idSucursal, @RequestBody Sucursal sucursalUpdate) {
+    public ResponseEntity<BaseResponse> actualizarSucursal(@PathVariable Integer idSucursal, @RequestBody Sucursal sucursalUpdate) {
         try {
+            if(sucursalService.obtenerSucursal(idSucursal) == null) {
+                return new ResponseEntity<>(BaseResponse.errorNotFound(),HttpStatus.NOT_FOUND);
+            }
             sucursalUpdate.setIdSucursal(idSucursal);
             Sucursal sucursal = sucursalService.actualizarSucursal(sucursalUpdate);
-            return new ResponseEntity<>(sucursal, HttpStatus.OK);
+            return new ResponseEntity<>(BaseResponse.success(sucursal), HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PatchMapping("/dar-baja/{idSucursal}")
-    public ResponseEntity<String> darBajaSucursal(@PathVariable Integer idSucursal){
+    public ResponseEntity<BaseResponse> darBajaSucursal(@PathVariable Integer idSucursal){
         try {
+            if(sucursalService.obtenerSucursal(idSucursal) == null) {
+                return new ResponseEntity<>(BaseResponse.errorNotFound(),HttpStatus.NOT_FOUND);
+            }
             sucursalService.darBajaSucursal(idSucursal);
-            return new ResponseEntity<>("OK",HttpStatus.OK);
+            return new ResponseEntity<>(BaseResponse.success(),HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
-    
 
 }

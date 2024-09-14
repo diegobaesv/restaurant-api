@@ -17,12 +17,12 @@ public class SucursalServiceImpl implements ISucursalService {
 
     @Override
     public List<Sucursal> listarSucursales() throws Exception {
-        return sucursalRepository.findAll();
+        return sucursalRepository.findByEstadoAuditoria("1");
     }
 
     @Override
     public Sucursal obtenerSucursal(Integer idSucursal) throws Exception {
-        return sucursalRepository.findById(idSucursal).orElse(null);
+        return sucursalRepository.findOneByIdSucursalAndEstadoAuditoria(idSucursal, "1");
     }
 
     @Override
