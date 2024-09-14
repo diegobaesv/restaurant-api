@@ -1,15 +1,29 @@
 @BASE_URL=http://localhost:8080
 
-GET {{BASE_URL}}/saludo
 
-### 
+## sucursales
 
-GET {{BASE_URL}}/saludo/alumno
-
-### 
-
-GET {{BASE_URL}}/saludo/alumno/1?query=hola
+GET {{BASE_URL}}/sucursales
 
 ###
 
-GET {{BASE_URL}}/saludo/sucursal/123
+GET {{BASE_URL}}/sucursales/3
+
+
+###
+
+
+POST {{BASE_URL}}/sucursales HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "Sucursal Servicio",
+    "direccion": "direccion prueba",
+    "imagenUrl": "http://localhost:8090/imagenes/restaurante1.jpg",
+    "telefono": "987654433",
+    "correo": "correoprueba@gmail.com",
+    "diasAtencion": "Lunes a Martes",
+    "horarioAtencion": "9:00am a 10:00am",
+    "latitud": "-12.1460036",
+    "longitud": "-76.9878069"
+}
