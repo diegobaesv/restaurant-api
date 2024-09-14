@@ -18,7 +18,7 @@ import lombok.Data;
 @Table(name = "sucursales")
 public class Sucursal {
 
-    @Id 
+    @Id
     @Column(name = "id_sucursal")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idSucursal;
