@@ -79,13 +79,17 @@ public class SucursalController {
     }
 
     @PutMapping("/{idSucursal}")
-    public ResponseEntity<BaseResponse> actualizarSucursal(@PathVariable Integer idSucursal, @RequestBody Sucursal sucursalUpdate) {
+    public ResponseEntity<BaseResponse> actualizarSucursal(@PathVariable Integer idSucursal,@Valid @RequestBody SucursalRequest sucursalRequest, Errors errors) {
         try {
+            if(errors.hasErrors()){
+                return new ResponseEntity<BaseResponse>(BaseResponse.error(Util.getOneMessageFromErrors(errors.getFieldErrors())),HttpStatus.BAD_REQUEST);
+            }
             if(sucursalService.obtenerSucursal(idSucursal) == null) {
                 return new ResponseEntity<>(BaseResponse.errorNotFound(),HttpStatus.NOT_FOUND);
             }
-            sucursalUpdate.setIdSucursal(idSucursal);
-            Sucursal sucursal = sucursalService.actualizarSucursal(sucursalUpdate);
+            Sucursal _sucursal = sucursalMapper.requestToEntity(sucursalRequest);
+            _sucursal.setIdSucursal(idSucursal);
+            Sucursal sucursal = sucursalService.actualizarSucursal(_sucursal);
             return new ResponseEntity<>(BaseResponse.success(sucursal), HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(BaseResponse.error(e.getMessage()),HttpStatus.INTERNAL_SERVER_ERROR);
