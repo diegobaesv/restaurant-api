@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ReporteMaestroRequest {
+    private String tituloReporte;
     private List<Cabecera> cabeceras;
     private Tabla tabla;
 }
