@@ -34,6 +34,7 @@ public class ReporteController {
             headers.setContentDisposition(ContentDisposition.inline().filename("reporte-maestro.pdf").build());
             return new ResponseEntity<byte[]>(reporteService.reporteMaestro(reporteMaestroRequest),headers,HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println(e);
             return new ResponseEntity<byte[]>((new byte[]{}),HttpStatus.INTERNAL_SERVER_ERROR);
         }
 

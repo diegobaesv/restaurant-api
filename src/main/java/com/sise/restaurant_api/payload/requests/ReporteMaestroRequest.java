@@ -7,18 +7,7 @@ import lombok.Data;
 @Data
 public class ReporteMaestroRequest {
     private String tituloReporte;
-    private List<Cabecera> cabeceras;
-    private Tabla tabla;
+    private List<ReporteCabeceraRequest> cabeceras;
+    private ReporteTablaRequest tabla;
 }
 
-@Data
-class Cabecera {
-    private String campo;
-    private String contenido;
-}
-
-@Data
-class Tabla {
-    private List<String> cabeceras;
-    private List<List<String>> data;
-}
