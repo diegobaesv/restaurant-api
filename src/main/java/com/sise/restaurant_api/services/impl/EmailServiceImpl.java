@@ -20,7 +20,7 @@ public class EmailServiceImpl implements IEmailService {
         .sendEmail(
             emailRequest, 
             "TENGO HAMBRE'S - GRACIAS POR REGISTRARTE", 
-            "<p>Hola este es mi correo</p>"
+            buildHtmlTemplate("<p>Hola este es mi correo</p>")
             );
     }
 
@@ -30,11 +30,29 @@ public class EmailServiceImpl implements IEmailService {
         .sendEmail(
             emailRequest, 
             "TENGO HAMBRE'S - OFERTAS DEL MES", 
-            "<p>Hola este es mi correo</p>"
+            buildHtmlTemplate("<p>Hola este es mi correo</p>")
             );
     }
 
+    private String buildHtmlTemplate(String body){
+        return new StringBuilder()
+                .append("<!DOCTYPE PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd”>")
+                .append("<html xmlns=\"http://www.w3.org/1999/xhtml\">")
+                .append("<head>")
+                    .append("<meta charset=\"UTF-8\">")
+                    .append("<meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">")
+                    .append("<title></title>")
+                .append("</head>")
+                .append("<body>")
+                    .append(body)
+                .append("</body>")
+                .append("</html>")
+                .toString();
+    }
 
-    
+
+
+
+
     
 }
