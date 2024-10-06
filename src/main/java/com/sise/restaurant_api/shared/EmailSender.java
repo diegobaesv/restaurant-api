@@ -18,7 +18,7 @@ public class EmailSender {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
-        helper.setFrom("dbaes97ps5asia@gmail.com", "Diego Spring");
+        helper.setFrom("dbaes97ps5asia@gmail.com", "Tengo Hambre's");
         helper.setTo(emailRequest.getEmailTo());
         if(emailRequest.getEmailCC() != null && emailRequest.getEmailCC().length > 0) {
             helper.setCc(emailRequest.getEmailCC());
